@@ -1,0 +1,9 @@
+name: fewshot-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch
+  - torchvision
+  - numpy
