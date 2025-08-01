@@ -21,32 +21,27 @@ jobs:
           auto-activate-base: false
 
       - name: Install pip dependencies (if any)
-        run: |
-          conda activate fewshot-env
-          pip install -r requirements.txt || true
+        run: pip install -r requirements.txt || true
+        shell: bash -l {0}
 
       - name: Check Python version
-        run: |
-          conda activate fewshot-env
-          python --version
+        run: python --version
+        shell: bash -l {0}
 
       - name: Lint with flake8
         run: |
-          conda activate fewshot-env
           pip install flake8
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        shell: bash -l {0}
 
       - name: Run tests (import check)
-        run: |
-          conda activate fewshot-env
-          python -c "import data; import prototypical_network"
+        run: python -c "import data; import prototypical_network"
+        shell: bash -l {0}
 
       - name: Run train script (smoke test)
-        run: |
-          conda activate fewshot-env
-          python train.py --epochs 1 --num_shots 1 --batch_size 2
+        run: python train.py --epochs 1 --num_shots 1 --batch_size 2
+        shell: bash -l {0}
 
       - name: Run test script (smoke test)
-        run: |
-          conda activate fewshot-env
-          python test.py --num_shots 1 --batch_size 2 
+        run: python test.py --num_shots 1 --batch_size 2
+        shell: bash -l {0}
